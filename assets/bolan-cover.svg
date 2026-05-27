@@ -1,97 +1,121 @@
 <svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Bolan cover</title>
-  <desc id="desc">A quiet minimal cover for Bolan, showing a reader, an open book, and a humane conversation with a distilled book persona.</desc>
+  <title id="title">Bolan Skill cover</title>
+  <desc id="desc">A humanistic minimal cover for Bolan Skill: an open book, a reader, textual anchors, external reception nodes, and an agent reasoning lattice.</desc>
   <defs>
     <linearGradient id="paper" x1="0" y1="0" x2="1280" y2="640" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F7F1E7"/>
-      <stop offset="0.58" stop-color="#EFE4D2"/>
-      <stop offset="1" stop-color="#E6D8C3"/>
+      <stop stop-color="#F8F3E8"/>
+      <stop offset="0.54" stop-color="#F0E7D5"/>
+      <stop offset="1" stop-color="#E4D7BF"/>
     </linearGradient>
-    <linearGradient id="book" x1="385" y1="316" x2="886" y2="452" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFF9EC"/>
-      <stop offset="1" stop-color="#E8DCC8"/>
+    <linearGradient id="pageLeft" x1="424" y1="292" x2="674" y2="492" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFDF5"/>
+      <stop offset="1" stop-color="#E9DDC8"/>
     </linearGradient>
-    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#5B4A39" flood-opacity="0.18"/>
+    <linearGradient id="pageRight" x1="662" y1="292" x2="926" y2="492" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9ED"/>
+      <stop offset="1" stop-color="#E1D0B2"/>
+    </linearGradient>
+    <radialGradient id="quietGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(798 222) rotate(90) scale(165 245)">
+      <stop stop-color="#2C7C72" stop-opacity="0.22"/>
+      <stop offset="0.55" stop-color="#31415B" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#31415B" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="bookShadow" x="342" y="238" width="650" height="328" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#5E4A32" flood-opacity="0.18"/>
     </filter>
+    <pattern id="paperGrain" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M9 12H10M31 7H32M41 31H42M17 39H18M5 44H6M27 27H28" stroke="#7E6B52" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
   </defs>
 
   <rect width="1280" height="640" fill="url(#paper)"/>
+  <rect width="1280" height="640" fill="url(#paperGrain)" opacity="0.7"/>
+  <rect x="70" y="62" width="1140" height="516" rx="0" stroke="#CDBF9F" stroke-opacity="0.44" stroke-width="1.5"/>
 
-  <path d="M130 108 C262 70 403 76 528 126 C659 178 768 170 882 129 C1011 82 1128 94 1184 123" stroke="#D8C8AF" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
-  <path d="M97 540 C244 490 406 500 545 548 C686 596 818 575 938 530 C1066 482 1164 507 1211 539" stroke="#D8C8AF" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
-
-  <g opacity="0.16">
-    <path d="M203 185 H421" stroke="#6A5D4F" stroke-width="1"/>
-    <path d="M859 188 H1080" stroke="#6A5D4F" stroke-width="1"/>
-    <path d="M202 457 H444" stroke="#6A5D4F" stroke-width="1"/>
-    <path d="M839 456 H1080" stroke="#6A5D4F" stroke-width="1"/>
+  <g opacity="0.4">
+    <path d="M115 214H336" stroke="#CDBF9F" stroke-width="1"/>
+    <path d="M115 314H284" stroke="#CDBF9F" stroke-width="1"/>
+    <path d="M115 414H340" stroke="#CDBF9F" stroke-width="1"/>
+    <path d="M988 178H1156" stroke="#CDBF9F" stroke-width="1"/>
+    <path d="M986 514H1157" stroke="#CDBF9F" stroke-width="1"/>
   </g>
 
-  <g filter="url(#softShadow)">
-    <path d="M379 336 C454 299 540 303 625 359 V484 C541 432 459 424 379 452 V336Z" fill="url(#book)"/>
-    <path d="M625 359 C710 303 796 299 871 336 V452 C791 424 709 432 625 484 V359Z" fill="#FBF4E6"/>
-    <path d="M625 359 V484" stroke="#B3A187" stroke-width="3" stroke-linecap="round"/>
-    <path d="M422 368 C477 350 532 355 587 383" stroke="#B7A68E" stroke-width="5" stroke-linecap="round" opacity="0.42"/>
-    <path d="M422 405 C479 390 532 394 587 420" stroke="#B7A68E" stroke-width="5" stroke-linecap="round" opacity="0.34"/>
-    <path d="M664 383 C719 355 774 350 829 368" stroke="#B7A68E" stroke-width="5" stroke-linecap="round" opacity="0.42"/>
-    <path d="M664 420 C719 394 772 390 829 405" stroke="#B7A68E" stroke-width="5" stroke-linecap="round" opacity="0.34"/>
+  <circle cx="798" cy="230" r="210" fill="url(#quietGlow)"/>
+
+  <g aria-label="Bolan Skill wordmark">
+    <text x="105" y="145" fill="#1F1E1A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="82" font-weight="760" letter-spacing="0">Bolan</text>
+    <text x="108" y="205" fill="#1F1E1A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="46" font-weight="650" letter-spacing="0">Skill</text>
+    <text x="110" y="255" fill="#B64231" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="30" font-weight="720" letter-spacing="0">博览群书</text>
+    <path d="M109 286H314" stroke="#B64231" stroke-width="5" stroke-linecap="round"/>
+    <text x="106" y="512" fill="#1F1E1A" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="30" font-weight="680" letter-spacing="0">把一本书，蒸馏成可以谈心的思想伙伴</text>
+    <text x="108" y="555" fill="#685D4B" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="540" letter-spacing="0">文本内证 · 读者外证 · book persona · agent skill</text>
   </g>
 
-  <g>
-    <ellipse cx="773" cy="166" rx="102" ry="54" transform="rotate(-4.6 773 166)" fill="#2D8A78" opacity="0.09"/>
-    <path d="M704 172 L737 143 L777 151 L813 128 L842 165 M777 151 L802 198 L747 198 L704 172 M737 143 L747 198" stroke="#2D8A78" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.34"/>
-    <path d="M704 172 C666 188 648 216 639 244" stroke="#B3442F" stroke-width="2.4" stroke-linecap="round" opacity="0.22"/>
-    <path d="M842 165 C874 185 878 216 860 244" stroke="#2D8A78" stroke-width="2.4" stroke-linecap="round" opacity="0.22"/>
-    <path d="M735 333 C735 292 748 235 747 198" stroke="#6A5D4F" stroke-width="1.5" stroke-linecap="round" opacity="0.18"/>
-    <path d="M800 333 C806 292 809 236 802 198" stroke="#6A5D4F" stroke-width="1.5" stroke-linecap="round" opacity="0.18"/>
-    <circle cx="704" cy="172" r="4" fill="#2D8A78"/>
-    <circle cx="737" cy="143" r="5" fill="#2D8A78"/>
-    <circle cx="777" cy="151" r="4" fill="#B3442F"/>
-    <circle cx="813" cy="128" r="5" fill="#2D8A78"/>
-    <circle cx="842" cy="165" r="4" fill="#2D8A78"/>
-    <circle cx="802" cy="198" r="4" fill="#6A5D4F"/>
-    <circle cx="747" cy="198" r="3.5" fill="#6A5D4F"/>
-    <path d="M786 153 C785 158 781 162 776 162 C771 162 767 158 768 153" stroke="#FFF9EC" stroke-width="1.8" stroke-linecap="round" opacity="0.74"/>
+  <g filter="url(#bookShadow)">
+    <path d="M423 315C489 281 577 284 672 345V500C582 443 494 435 423 465V315Z" fill="url(#pageLeft)"/>
+    <path d="M672 345C767 284 855 281 921 315V465C850 435 762 443 672 500V345Z" fill="url(#pageRight)"/>
+    <path d="M672 345V500" stroke="#BCAA8C" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M447 329C506 307 585 316 641 358" stroke="#BCAA8C" stroke-width="3" stroke-linecap="round" stroke-opacity="0.55"/>
+    <path d="M447 365C515 347 587 354 641 392" stroke="#BCAA8C" stroke-width="3" stroke-linecap="round" stroke-opacity="0.42"/>
+    <path d="M447 402C521 389 587 394 641 427" stroke="#BCAA8C" stroke-width="3" stroke-linecap="round" stroke-opacity="0.32"/>
+    <path d="M704 358C760 316 839 307 898 329" stroke="#BCAA8C" stroke-width="3" stroke-linecap="round" stroke-opacity="0.55"/>
+    <path d="M704 392C758 354 830 347 898 365" stroke="#BCAA8C" stroke-width="3" stroke-linecap="round" stroke-opacity="0.42"/>
+    <path d="M704 427C758 394 824 389 898 402" stroke="#BCAA8C" stroke-width="3" stroke-linecap="round" stroke-opacity="0.32"/>
   </g>
 
-  <g>
-    <circle cx="624" cy="245" r="34" fill="#2D2722"/>
-    <path d="M575 325 C580 278 609 251 625 251 C641 251 670 278 675 325" stroke="#2D2722" stroke-width="24" stroke-linecap="round"/>
-    <path d="M548 322 C584 342 608 352 625 369 C642 352 666 342 702 322" stroke="#2D2722" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <g aria-label="reader">
+    <circle cx="672" cy="267" r="29" fill="#1F1E1A"/>
+    <path d="M627 340C632 303 655 278 672 278C689 278 712 303 717 340" stroke="#1F1E1A" stroke-width="20" stroke-linecap="round"/>
+    <path d="M594 337C629 353 655 365 672 384C689 365 715 353 750 337" stroke="#1F1E1A" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 
-  <g>
-    <path d="M516 272 C455 220 393 205 336 230 C276 257 259 323 296 367 C330 407 393 411 450 378" stroke="#B3442F" stroke-width="5" stroke-linecap="round" opacity="0.78"/>
-    <path d="M764 272 C825 220 887 205 944 230 C1004 257 1021 323 984 367 C950 407 887 411 830 378" stroke="#2D8A78" stroke-width="5" stroke-linecap="round" opacity="0.78"/>
-    <circle cx="336" cy="230" r="8" fill="#B3442F"/>
-    <circle cx="944" cy="230" r="8" fill="#2D8A78"/>
+  <g aria-label="internal text anchors">
+    <path d="M450 278C397 220 342 198 290 214C237 231 210 287 233 336C256 383 315 400 377 369" stroke="#B64231" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.72"/>
+    <path d="M292 214L276 185" stroke="#B64231" stroke-width="2.6" stroke-linecap="round" stroke-opacity="0.64"/>
+    <path d="M336 392L326 428" stroke="#B64231" stroke-width="2.6" stroke-linecap="round" stroke-opacity="0.54"/>
+    <circle cx="290" cy="214" r="6" fill="#B64231"/>
+    <circle cx="233" cy="336" r="5" fill="#B64231" fill-opacity="0.78"/>
+    <circle cx="377" cy="369" r="5" fill="#B64231" fill-opacity="0.7"/>
+    <text x="238" y="174" fill="#B64231" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700" letter-spacing="0">text anchors</text>
   </g>
 
-  <g>
-    <path d="M227 216 C275 201 403 204 429 226 C435 260 436 302 415 324 C361 344 263 343 221 324 C202 294 200 244 227 216Z" fill="#FFF9EC" fill-opacity="0.48"/>
-    <path d="M864 216 C912 201 1040 204 1066 226 C1072 260 1073 302 1052 324 C998 344 900 343 858 324 C839 294 837 244 864 216Z" fill="#FFF9EC" fill-opacity="0.48"/>
-    <path d="M223 224 H257 M223 224 V258 M425 224 H391 M425 224 V258 M223 312 H257 M223 312 V278 M425 312 H391 M425 312 V278" stroke="#B3442F" stroke-width="3" stroke-linecap="round" opacity="0.74"/>
-    <path d="M860 224 H894 M860 224 V258 M1062 224 H1028 M1062 224 V258 M860 312 H894 M860 312 V278 M1062 312 H1028 M1062 312 V278" stroke="#2D8A78" stroke-width="3" stroke-linecap="round" opacity="0.74"/>
-    <path d="M267 248 H379 M267 276 H411 M267 304 H359" stroke="#B3442F" stroke-width="4.5" stroke-linecap="round" opacity="0.5"/>
-    <path d="M904 248 H1030 M904 276 H994 M904 304 H1046" stroke="#2D8A78" stroke-width="4.5" stroke-linecap="round" opacity="0.5"/>
-    <circle cx="245" cy="248" r="4.5" fill="#B3442F" opacity="0.75"/>
-    <circle cx="882" cy="248" r="4.5" fill="#2D8A78" opacity="0.75"/>
-    <circle cx="245" cy="248" r="14" stroke="#B3442F" stroke-width="1.6" opacity="0.34"/>
-    <circle cx="882" cy="248" r="14" stroke="#2D8A78" stroke-width="1.6" opacity="0.34"/>
-    <path d="M245 248 L267 276 L245 304" stroke="#B3442F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.26"/>
-    <path d="M882 248 L904 276 L882 304" stroke="#2D8A78" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.26"/>
+  <g aria-label="external reception">
+    <path d="M895 279C950 221 1008 199 1060 217C1115 235 1140 292 1115 340C1091 386 1031 400 970 368" stroke="#2C7C72" stroke-width="3.6" stroke-linecap="round" stroke-opacity="0.72"/>
+    <path d="M1059 217L1084 190" stroke="#2C7C72" stroke-width="2.6" stroke-linecap="round" stroke-opacity="0.64"/>
+    <path d="M1011 390L1024 426" stroke="#2C7C72" stroke-width="2.6" stroke-linecap="round" stroke-opacity="0.54"/>
+    <circle cx="1060" cy="217" r="6" fill="#2C7C72"/>
+    <circle cx="1115" cy="340" r="5" fill="#2C7C72" fill-opacity="0.78"/>
+    <circle cx="970" cy="368" r="5" fill="#2C7C72" fill-opacity="0.7"/>
+    <text x="1018" y="176" fill="#2C7C72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="700" letter-spacing="0">reader reception</text>
   </g>
 
-  <g>
-    <text x="116" y="132" fill="#2D2722" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="76" font-weight="760" letter-spacing="0">Bolan</text>
-    <text x="119" y="181" fill="#B3442F" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="31" font-weight="700" letter-spacing="0">博览群书</text>
-    <text x="118" y="514" fill="#2D2722" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="30" font-weight="650" letter-spacing="0">把一本书，蒸馏成可以谈心的思想伙伴</text>
-    <text x="119" y="556" fill="#6A5D4F" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="21" font-weight="500" letter-spacing="0">文本内证 + 读者外证 · distill books into conversations</text>
+  <g aria-label="agent reasoning lattice">
+    <path d="M660 158L708 116L770 132L824 95L875 145L848 211L777 224L724 201L660 158Z" stroke="#31415B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.48"/>
+    <path d="M708 116L724 201M770 132L777 224M824 95L848 211M770 132L848 211M708 116L770 132M724 201L848 211" stroke="#31415B" stroke-width="1.6" stroke-linecap="round" stroke-opacity="0.34"/>
+    <path d="M660 158C620 182 599 214 589 252" stroke="#B64231" stroke-width="2" stroke-linecap="round" stroke-opacity="0.25"/>
+    <path d="M875 145C914 177 927 214 912 253" stroke="#2C7C72" stroke-width="2" stroke-linecap="round" stroke-opacity="0.25"/>
+    <path d="M724 201C703 228 688 246 672 267" stroke="#685D4B" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.24"/>
+    <path d="M848 211C790 234 738 248 672 267" stroke="#685D4B" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.2"/>
+    <circle cx="660" cy="158" r="5" fill="#31415B"/>
+    <circle cx="708" cy="116" r="6" fill="#2C7C72"/>
+    <circle cx="770" cy="132" r="5" fill="#B64231"/>
+    <circle cx="824" cy="95" r="6" fill="#31415B"/>
+    <circle cx="875" cy="145" r="5" fill="#2C7C72"/>
+    <circle cx="848" cy="211" r="5" fill="#31415B"/>
+    <circle cx="777" cy="224" r="4" fill="#685D4B"/>
+    <circle cx="724" cy="201" r="4" fill="#685D4B"/>
+    <path d="M779 123V141M761 132H779" stroke="#FFF9ED" stroke-width="1.8" stroke-linecap="round" stroke-opacity="0.8"/>
   </g>
 
-  <g>
-    <path d="M1084 522 C1118 497 1162 499 1185 528 C1207 556 1193 589 1158 597 C1128 604 1095 590 1084 563 L1060 563 L1075 548 C1072 538 1075 529 1084 522Z" fill="#2D8A78"/>
-    <text x="1106" y="565" fill="#F7F1E7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="19" font-weight="780" letter-spacing="0">skill</text>
+  <g aria-label="validation labels">
+    <path d="M963 456H1133" stroke="#2C7C72" stroke-width="1.5" stroke-opacity="0.42"/>
+    <path d="M963 487H1089" stroke="#B64231" stroke-width="1.5" stroke-opacity="0.42"/>
+    <text x="963" y="448" fill="#2C7C72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="17" font-weight="650" letter-spacing="0">external validation</text>
+    <text x="963" y="510" fill="#B64231" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="17" font-weight="650" letter-spacing="0">internal validation</text>
+  </g>
+
+  <g aria-label="seal">
+    <rect x="1132" y="488" width="62" height="62" fill="none" stroke="#B64231" stroke-width="4"/>
+    <text x="1149" y="532" fill="#B64231" font-family="'PingFang SC', 'STSong', 'Songti SC', serif" font-size="34" font-weight="760" letter-spacing="0">博</text>
   </g>
 </svg>
