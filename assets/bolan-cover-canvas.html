@@ -3,301 +3,322 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bolan Cover Canvas</title>
+  <title>Bolan Skill Cover Canvas</title>
   <style>
-    html, body {
+    :root {
+      color-scheme: light;
+      background: #e7dbc4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
       margin: 0;
       min-height: 100%;
-      background: #efe4d2;
+      background:
+        radial-gradient(circle at 55% 20%, rgba(44, 124, 114, 0.14), transparent 36rem),
+        #e7dbc4;
       display: grid;
       place-items: center;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
     }
-    canvas {
+
+    main {
       width: min(100vw, 1280px);
+      padding: clamp(12px, 2vw, 28px);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
       height: auto;
-      box-shadow: 0 24px 70px rgba(72, 55, 37, 0.22);
+      background: #f0e7d5;
+      box-shadow: 0 26px 80px rgba(78, 61, 40, 0.22);
     }
   </style>
 </head>
 <body>
-  <canvas id="cover" width="1280" height="640" aria-label="Bolan cover"></canvas>
+  <main>
+    <canvas id="cover" width="1280" height="640" aria-label="Bolan Skill cover"></canvas>
+  </main>
+
   <script>
+    /*
+      Design decisions:
+      - Editorial/humanist minimalism instead of generic tech gloss.
+      - AI is represented as a reasoning lattice connected to the book, not as text.
+      - Red = internal textual anchors; teal = external reader reception.
+      - The cover is intentionally still and bookish: the skill is about attention, not spectacle.
+    */
     const canvas = document.getElementById("cover");
     const ctx = canvas.getContext("2d");
     const W = canvas.width;
     const H = canvas.height;
 
-    const ink = "#2D2722";
-    const vermilion = "#B3442F";
-    const jade = "#2D8A78";
-    const warmLine = "#D8C8AF";
-    const muted = "#6A5D4F";
+    const ink = "#1F1E1A";
+    const muted = "#685D4B";
+    const line = "#CDBF9F";
+    const paperA = "#F8F3E8";
+    const paperB = "#F0E7D5";
+    const paperC = "#E4D7BF";
+    const red = "#B64231";
+    const teal = "#2C7C72";
+    const indigo = "#31415B";
 
-    function path(points, close = false) {
+    function strokePath(points, color, width, alpha = 1) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
       ctx.beginPath();
       ctx.moveTo(points[0][0], points[0][1]);
-      for (let i = 1; i < points.length; i++) ctx.lineTo(points[i][0], points[i][1]);
-      if (close) ctx.closePath();
-    }
-
-    function drawMarginalNote(x, y, w, h, side, accent) {
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(x + 22, y + 10);
-      ctx.bezierCurveTo(x + 70, y - 5, x + w - 38, y - 2, x + w - 12, y + 20);
-      ctx.bezierCurveTo(x + w - 6, y + 54, x + w - 5, y + h - 34, x + w - 26, y + h - 12);
-      ctx.bezierCurveTo(x + w - 80, y + h + 8, x + 58, y + h + 7, x + 16, y + h - 12);
-      ctx.bezierCurveTo(x - 3, y + h - 42, x - 5, y + 38, x + 22, y + 10);
-      ctx.closePath();
-      ctx.fillStyle = "rgba(255, 249, 236, 0.48)";
-      ctx.fill();
-
-      ctx.strokeStyle = accent;
-      ctx.lineWidth = 3;
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-      ctx.globalAlpha = 0.74;
-      const corner = 34;
-      [[x + 18, y + 18, x + 18 + corner, y + 18], [x + 18, y + 18, x + 18, y + 18 + corner],
-       [x + w - 18, y + 18, x + w - 18 - corner, y + 18], [x + w - 18, y + 18, x + w - 18, y + 18 + corner],
-       [x + 18, y + h - 18, x + 18 + corner, y + h - 18], [x + 18, y + h - 18, x + 18, y + h - 18 - corner],
-       [x + w - 18, y + h - 18, x + w - 18 - corner, y + h - 18], [x + w - 18, y + h - 18, x + w - 18, y + h - 18 - corner]
-      ].forEach(([x1, y1, x2, y2]) => {
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-      });
-
-      ctx.globalAlpha = 0.5;
-      ctx.lineWidth = 4.5;
-      const lineStart = x + 62;
-      const lengths = side === "left" ? [112, 144, 92] : [126, 90, 142];
-      [0, 1, 2].forEach((i) => {
-        ctx.beginPath();
-        ctx.moveTo(lineStart, y + 42 + i * 28);
-        ctx.lineTo(lineStart + lengths[i], y + 42 + i * 28);
-        ctx.stroke();
-      });
-
-      ctx.globalAlpha = 0.75;
-      ctx.fillStyle = accent;
-      ctx.beginPath();
-      ctx.arc(x + 40, y + 42, 4.5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.globalAlpha = 0.34;
-      ctx.beginPath();
-      ctx.arc(x + 40, y + 42, 14, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.globalAlpha = 0.26;
-      ctx.lineWidth = 1.6;
-      ctx.beginPath();
-      ctx.moveTo(x + 40, y + 42);
-      ctx.lineTo(x + 62, y + 70);
-      ctx.lineTo(x + 40, y + 98);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i][0], points[i][1]);
+      }
       ctx.stroke();
       ctx.restore();
     }
 
-    function roundedRect(x, y, w, h, r) {
+    function bezier(start, c1, c2, end, color, width, alpha = 1) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.lineCap = "round";
       ctx.beginPath();
-      ctx.moveTo(x + r, y);
-      ctx.lineTo(x + w - r, y);
-      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-      ctx.lineTo(x + w, y + h - r);
-      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-      ctx.lineTo(x + r, y + h);
-      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-      ctx.lineTo(x, y + r);
-      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.moveTo(start[0], start[1]);
+      ctx.bezierCurveTo(c1[0], c1[1], c2[0], c2[1], end[0], end[1]);
+      ctx.stroke();
+      ctx.restore();
     }
 
-    function drawInferenceConstellation() {
+    function dot(x, y, r, color, alpha = 1) {
       ctx.save();
-      const nodes = [
-        [704, 172, 4, jade],
-        [737, 143, 5, jade],
-        [777, 151, 4, vermilion],
-        [813, 128, 5, jade],
-        [842, 165, 4, jade],
-        [802, 198, 4, muted],
-        [747, 198, 3.5, muted]
-      ];
-
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-      ctx.strokeStyle = jade;
-      ctx.lineWidth = 2.4;
-      ctx.globalAlpha = 0.34;
-      [[0, 1], [1, 2], [2, 3], [3, 4], [2, 5], [5, 6], [6, 0], [1, 6]].forEach(([a, b]) => {
-        ctx.beginPath();
-        ctx.moveTo(nodes[a][0], nodes[a][1]);
-        ctx.lineTo(nodes[b][0], nodes[b][1]);
-        ctx.stroke();
-      });
-
-      ctx.globalAlpha = 0.22;
-      ctx.strokeStyle = vermilion;
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = color;
       ctx.beginPath();
-      ctx.moveTo(704, 172);
-      ctx.bezierCurveTo(666, 188, 648, 216, 639, 244);
-      ctx.stroke();
-      ctx.strokeStyle = jade;
-      ctx.beginPath();
-      ctx.moveTo(842, 165);
-      ctx.bezierCurveTo(874, 185, 878, 216, 860, 244);
-      ctx.stroke();
-
-      ctx.globalAlpha = 0.09;
-      ctx.fillStyle = jade;
-      ctx.beginPath();
-      ctx.ellipse(773, 166, 102, 54, -0.08, 0, Math.PI * 2);
+      ctx.arc(x, y, r, 0, Math.PI * 2);
       ctx.fill();
+      ctx.restore();
+    }
 
-      ctx.globalAlpha = 1;
-      nodes.forEach(([x, y, r, color]) => {
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fill();
-      });
+    function text(value, x, y, size, weight, color, family = "sans", alpha = 1) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      const fontFamily = family === "serif"
+        ? "'PingFang SC', 'STSong', 'Songti SC', serif"
+        : "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif";
+      ctx.fillStyle = color;
+      ctx.font = `${weight} ${size}px ${fontFamily}`;
+      ctx.fillText(value, x, y);
+      ctx.restore();
+    }
 
-      ctx.globalAlpha = 0.74;
-      ctx.strokeStyle = "#FFF9EC";
-      ctx.lineWidth = 1.8;
-      ctx.beginPath();
-      ctx.arc(777, 151, 9, 0.2, Math.PI * 1.72);
-      ctx.stroke();
+    function drawBackground() {
+      const bg = ctx.createLinearGradient(0, 0, W, H);
+      bg.addColorStop(0, paperA);
+      bg.addColorStop(0.54, paperB);
+      bg.addColorStop(1, paperC);
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, W, H);
 
+      ctx.save();
       ctx.globalAlpha = 0.18;
-      ctx.strokeStyle = muted;
+      ctx.strokeStyle = "#7E6B52";
+      ctx.lineWidth = 1;
+      for (let y = 18; y < H; y += 48) {
+        for (let x = 12; x < W; x += 48) {
+          const n = (x * 13 + y * 7) % 43;
+          if (n < 8) {
+            ctx.beginPath();
+            ctx.moveTo(x + n, y + (n % 9));
+            ctx.lineTo(x + n + 1, y + (n % 9));
+            ctx.stroke();
+          }
+        }
+      }
+      ctx.restore();
+
+      ctx.strokeStyle = "rgba(205, 191, 159, 0.44)";
       ctx.lineWidth = 1.5;
-      [[735, 333, 735, 292, 748, 235, 747, 198], [800, 333, 806, 292, 809, 236, 802, 198]].forEach(c => {
+      ctx.strokeRect(70, 62, 1140, 516);
+
+      ctx.save();
+      ctx.globalAlpha = 0.4;
+      [[115, 214, 336, 214], [115, 314, 284, 314], [115, 414, 340, 414], [988, 178, 1156, 178], [986, 514, 1157, 514]].forEach(l => {
         ctx.beginPath();
-        ctx.moveTo(c[0], c[1]);
-        ctx.bezierCurveTo(c[2], c[3], c[4], c[5], c[6], c[7]);
+        ctx.moveTo(l[0], l[1]);
+        ctx.lineTo(l[2], l[3]);
+        ctx.strokeStyle = line;
         ctx.stroke();
       });
       ctx.restore();
+
+      const glow = ctx.createRadialGradient(798, 230, 0, 798, 230, 240);
+      glow.addColorStop(0, "rgba(44, 124, 114, 0.22)");
+      glow.addColorStop(0.55, "rgba(49, 65, 91, 0.08)");
+      glow.addColorStop(1, "rgba(49, 65, 91, 0)");
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(798, 230, 240, 0, Math.PI * 2);
+      ctx.fill();
     }
 
-    const bg = ctx.createLinearGradient(0, 0, W, H);
-    bg.addColorStop(0, "#F7F1E7");
-    bg.addColorStop(0.58, "#EFE4D2");
-    bg.addColorStop(1, "#E6D8C3");
-    ctx.fillStyle = bg;
-    ctx.fillRect(0, 0, W, H);
+    function drawWordmark() {
+      text("Bolan", 105, 145, 82, 760, ink);
+      text("Skill", 108, 205, 46, 650, ink);
+      text("博览群书", 110, 255, 30, 720, red);
+      ctx.strokeStyle = red;
+      ctx.lineWidth = 5;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(109, 286);
+      ctx.lineTo(314, 286);
+      ctx.stroke();
+      text("把一本书，蒸馏成可以谈心的思想伙伴", 106, 512, 30, 680, ink);
+      text("文本内证 · 读者外证 · book persona · agent skill", 108, 555, 20, 540, muted);
+    }
 
-    ctx.globalAlpha = 0.55;
-    ctx.strokeStyle = warmLine;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(130, 108);
-    ctx.bezierCurveTo(262, 70, 403, 76, 528, 126);
-    ctx.bezierCurveTo(659, 178, 768, 170, 882, 129);
-    ctx.bezierCurveTo(1011, 82, 1128, 94, 1184, 123);
-    ctx.stroke();
-    ctx.globalAlpha = 0.45;
-    ctx.beginPath();
-    ctx.moveTo(97, 540);
-    ctx.bezierCurveTo(244, 490, 406, 500, 545, 548);
-    ctx.bezierCurveTo(686, 596, 818, 575, 938, 530);
-    ctx.bezierCurveTo(1066, 482, 1164, 507, 1211, 539);
-    ctx.stroke();
-    ctx.globalAlpha = 1;
+    function drawBook() {
+      ctx.save();
+      ctx.shadowColor = "rgba(94, 74, 50, 0.18)";
+      ctx.shadowBlur = 38;
+      ctx.shadowOffsetY = 24;
 
-    drawInferenceConstellation();
+      const left = ctx.createLinearGradient(424, 292, 674, 492);
+      left.addColorStop(0, "#FFFDF5");
+      left.addColorStop(1, "#E9DDC8");
+      ctx.fillStyle = left;
+      ctx.beginPath();
+      ctx.moveTo(423, 315);
+      ctx.bezierCurveTo(489, 281, 577, 284, 672, 345);
+      ctx.lineTo(672, 500);
+      ctx.bezierCurveTo(582, 443, 494, 435, 423, 465);
+      ctx.closePath();
+      ctx.fill();
 
-    ctx.save();
-    ctx.shadowColor = "rgba(91, 74, 57, 0.18)";
-    ctx.shadowBlur = 28;
-    ctx.shadowOffsetY = 18;
-    const page = ctx.createLinearGradient(385, 316, 886, 452);
-    page.addColorStop(0, "#FFF9EC");
-    page.addColorStop(1, "#E8DCC8");
-    ctx.fillStyle = page;
-    ctx.beginPath();
-    ctx.moveTo(379, 336);
-    ctx.bezierCurveTo(454, 299, 540, 303, 625, 359);
-    ctx.lineTo(625, 484);
-    ctx.bezierCurveTo(541, 432, 459, 424, 379, 452);
-    ctx.closePath();
-    ctx.fill();
-    ctx.fillStyle = "#FBF4E6";
-    ctx.beginPath();
-    ctx.moveTo(625, 359);
-    ctx.bezierCurveTo(710, 303, 796, 299, 871, 336);
-    ctx.lineTo(871, 452);
-    ctx.bezierCurveTo(791, 424, 709, 432, 625, 484);
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
+      const right = ctx.createLinearGradient(662, 292, 926, 492);
+      right.addColorStop(0, "#FFF9ED");
+      right.addColorStop(1, "#E1D0B2");
+      ctx.fillStyle = right;
+      ctx.beginPath();
+      ctx.moveTo(672, 345);
+      ctx.bezierCurveTo(767, 284, 855, 281, 921, 315);
+      ctx.lineTo(921, 465);
+      ctx.bezierCurveTo(850, 435, 762, 443, 672, 500);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
 
-    ctx.strokeStyle = "#B3A187";
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(625, 359);
-    ctx.lineTo(625, 484);
-    ctx.stroke();
+      ctx.strokeStyle = "#BCAA8C";
+      ctx.lineCap = "round";
+      ctx.lineWidth = 3.2;
+      ctx.beginPath();
+      ctx.moveTo(672, 345);
+      ctx.lineTo(672, 500);
+      ctx.stroke();
 
-    ctx.strokeStyle = "#B7A68E";
-    ctx.lineWidth = 5;
-    ctx.lineCap = "round";
-    ctx.globalAlpha = 0.42;
-    [[422,368,477,350,532,355,587,383],[664,383,719,355,774,350,829,368]].forEach(c => {
-      ctx.beginPath(); ctx.moveTo(c[0], c[1]); ctx.bezierCurveTo(c[2], c[3], c[4], c[5], c[6], c[7]); ctx.stroke();
-    });
-    ctx.globalAlpha = 0.34;
-    [[422,405,479,390,532,394,587,420],[664,420,719,394,772,390,829,405]].forEach(c => {
-      ctx.beginPath(); ctx.moveTo(c[0], c[1]); ctx.bezierCurveTo(c[2], c[3], c[4], c[5], c[6], c[7]); ctx.stroke();
-    });
-    ctx.globalAlpha = 1;
+      [
+        [447, 329, 506, 307, 585, 316, 641, 358, 0.55],
+        [447, 365, 515, 347, 587, 354, 641, 392, 0.42],
+        [447, 402, 521, 389, 587, 394, 641, 427, 0.32],
+        [704, 358, 760, 316, 839, 307, 898, 329, 0.55],
+        [704, 392, 758, 354, 830, 347, 898, 365, 0.42],
+        [704, 427, 758, 394, 824, 389, 898, 402, 0.32]
+      ].forEach(c => bezier([c[0], c[1]], [c[2], c[3]], [c[4], c[5]], [c[6], c[7]], "#BCAA8C", 3, c[8]));
+    }
 
-    ctx.fillStyle = ink;
-    ctx.beginPath(); ctx.arc(624, 245, 34, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = ink;
-    ctx.lineWidth = 24;
-    ctx.lineCap = "round";
-    ctx.beginPath(); ctx.moveTo(575, 325); ctx.bezierCurveTo(580, 278, 609, 251, 625, 251); ctx.bezierCurveTo(641, 251, 670, 278, 675, 325); ctx.stroke();
-    ctx.lineWidth = 18;
-    ctx.beginPath(); ctx.moveTo(548, 322); ctx.bezierCurveTo(584, 342, 608, 352, 625, 369); ctx.bezierCurveTo(642, 352, 666, 342, 702, 322); ctx.stroke();
+    function drawReader() {
+      ctx.fillStyle = ink;
+      ctx.beginPath();
+      ctx.arc(672, 267, 29, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = ink;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.lineWidth = 20;
+      ctx.beginPath();
+      ctx.moveTo(627, 340);
+      ctx.bezierCurveTo(632, 303, 655, 278, 672, 278);
+      ctx.bezierCurveTo(689, 278, 712, 303, 717, 340);
+      ctx.stroke();
+      ctx.lineWidth = 14;
+      ctx.beginPath();
+      ctx.moveTo(594, 337);
+      ctx.bezierCurveTo(629, 353, 655, 365, 672, 384);
+      ctx.bezierCurveTo(689, 365, 715, 353, 750, 337);
+      ctx.stroke();
+    }
 
-    ctx.lineWidth = 5;
-    ctx.globalAlpha = 0.78;
-    ctx.strokeStyle = vermilion;
-    ctx.beginPath(); ctx.moveTo(516, 272); ctx.bezierCurveTo(455, 220, 393, 205, 336, 230); ctx.bezierCurveTo(276, 257, 259, 323, 296, 367); ctx.bezierCurveTo(330, 407, 393, 411, 450, 378); ctx.stroke();
-    ctx.strokeStyle = jade;
-    ctx.beginPath(); ctx.moveTo(764, 272); ctx.bezierCurveTo(825, 220, 887, 205, 944, 230); ctx.bezierCurveTo(1004, 257, 1021, 323, 984, 367); ctx.bezierCurveTo(950, 407, 887, 411, 830, 378); ctx.stroke();
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = vermilion; ctx.beginPath(); ctx.arc(336, 230, 8, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = jade; ctx.beginPath(); ctx.arc(944, 230, 8, 0, Math.PI * 2); ctx.fill();
+    function drawValidationArcs() {
+      bezier([450, 278], [397, 220], [342, 198], [290, 214], red, 3.6, 0.72);
+      bezier([290, 214], [237, 231], [210, 287], [233, 336], red, 3.6, 0.72);
+      bezier([233, 336], [256, 383], [315, 400], [377, 369], red, 3.6, 0.72);
+      strokePath([[292, 214], [276, 185]], red, 2.6, 0.64);
+      strokePath([[336, 392], [326, 428]], red, 2.6, 0.54);
+      dot(290, 214, 6, red);
+      dot(233, 336, 5, red, 0.78);
+      dot(377, 369, 5, red, 0.7);
+      text("text anchors", 238, 174, 15, 700, red);
 
-    drawMarginalNote(205, 206, 238, 124, "left", vermilion);
-    drawMarginalNote(842, 206, 238, 124, "right", jade);
-    ctx.lineWidth = 5;
-    ctx.lineCap = "round";
-    ctx.globalAlpha = 0.62;
-    ctx.strokeStyle = vermilion; ctx.beginPath(); ctx.moveTo(257, 244); ctx.lineTo(380, 244); ctx.stroke();
-    ctx.strokeStyle = jade; ctx.beginPath(); ctx.moveTo(899, 244); ctx.lineTo(1022, 244); ctx.stroke();
-    ctx.globalAlpha = 0.45;
-    ctx.strokeStyle = vermilion; ctx.beginPath(); ctx.moveTo(257, 281); ctx.lineTo(344, 281); ctx.stroke();
-    ctx.strokeStyle = jade; ctx.beginPath(); ctx.moveTo(899, 281); ctx.lineTo(986, 281); ctx.stroke();
-    ctx.globalAlpha = 1;
+      bezier([895, 279], [950, 221], [1008, 199], [1060, 217], teal, 3.6, 0.72);
+      bezier([1060, 217], [1115, 235], [1140, 292], [1115, 340], teal, 3.6, 0.72);
+      bezier([1115, 340], [1091, 386], [1031, 400], [970, 368], teal, 3.6, 0.72);
+      strokePath([[1059, 217], [1084, 190]], teal, 2.6, 0.64);
+      strokePath([[1011, 390], [1024, 426]], teal, 2.6, 0.54);
+      dot(1060, 217, 6, teal);
+      dot(1115, 340, 5, teal, 0.78);
+      dot(970, 368, 5, teal, 0.7);
+      text("reader reception", 1018, 176, 15, 700, teal);
+    }
 
-    ctx.fillStyle = ink;
-    ctx.font = "760 76px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif";
-    ctx.fillText("Bolan", 116, 132);
-    ctx.fillStyle = vermilion;
-    ctx.font = "700 31px -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, sans-serif";
-    ctx.fillText("博览群书", 119, 181);
-    ctx.fillStyle = ink;
-    ctx.font = "650 30px -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, sans-serif";
-    ctx.fillText("把一本书，蒸馏成可以谈心的思想伙伴", 118, 514);
-    ctx.fillStyle = muted;
-    ctx.font = "500 21px -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, sans-serif";
-    ctx.fillText("文本内证 + 读者外证 · distill books into conversations", 119, 556);
+    function drawReasoningLattice() {
+      const nodes = [
+        [660, 158, 5, indigo],
+        [708, 116, 6, teal],
+        [770, 132, 5, red],
+        [824, 95, 6, indigo],
+        [875, 145, 5, teal],
+        [848, 211, 5, indigo],
+        [777, 224, 4, muted],
+        [724, 201, 4, muted]
+      ];
+      [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,0],[1,7],[2,6],[3,5],[2,5],[1,2],[7,5]].forEach(([a, b], i) => {
+        strokePath([[nodes[a][0], nodes[a][1]], [nodes[b][0], nodes[b][1]]], indigo, i < 8 ? 2.2 : 1.6, i < 8 ? 0.48 : 0.34);
+      });
+      bezier([660, 158], [620, 182], [599, 214], [589, 252], red, 2, 0.25);
+      bezier([875, 145], [914, 177], [927, 214], [912, 253], teal, 2, 0.25);
+      bezier([724, 201], [703, 228], [688, 246], [672, 267], muted, 1.5, 0.24);
+      bezier([848, 211], [790, 234], [738, 248], [672, 267], muted, 1.5, 0.2);
+      nodes.forEach(n => dot(n[0], n[1], n[2], n[3]));
+      strokePath([[779, 123], [779, 141]], "#FFF9ED", 1.8, 0.8);
+      strokePath([[761, 132], [779, 132]], "#FFF9ED", 1.8, 0.8);
+    }
+
+    function drawLabelsAndSeal() {
+      strokePath([[963, 456], [1133, 456]], teal, 1.5, 0.42);
+      strokePath([[963, 487], [1089, 487]], red, 1.5, 0.42);
+      text("external validation", 963, 448, 17, 650, teal);
+      text("internal validation", 963, 510, 17, 650, red);
+
+      ctx.strokeStyle = red;
+      ctx.lineWidth = 4;
+      ctx.strokeRect(1132, 488, 62, 62);
+      text("博", 1149, 532, 34, 760, red, "serif");
+    }
+
+    drawBackground();
+    drawWordmark();
+    drawBook();
+    drawReader();
+    drawValidationArcs();
+    drawReasoningLattice();
+    drawLabelsAndSeal();
   </script>
 </body>
 </html>
