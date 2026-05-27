@@ -1,15 +1,15 @@
 ---
-name: bolan
-description: Bolan, meaning 博览群书, turns a book, manuscript, excerpt, PDF, EPUB, DOCX, TXT, Markdown file, notes, or pasted text into a distilled conversational book persona with internal text validation and external reception validation from sources such as Douban, Amazon, Goodreads, professional reviews, academic/industry discussion, and reader criticism. Use when the user asks natural book-reading prompts such as “蒸馏这本书《》”, “我要跟这本书《》聊天”, “这本书《》说了啥”, “这本书怎么想”, “这本书怎么看”, “帮我读《》”, “拆解《》”, or after a book is distilled wants to keep asking the current book what it thinks, how it would answer, how it would challenge the reader, or how its logic applies to a concrete question.
+name: bolan-skill
+description: Bolan Skill, meaning 博览群书, turns a book, manuscript, excerpt, PDF, EPUB, DOCX, TXT, Markdown file, notes, or pasted text into a distilled conversational book persona with internal text validation and external reception validation from sources such as Douban, Amazon, Goodreads, professional reviews, academic/industry discussion, and reader criticism. Use when the user asks natural book-reading prompts such as “蒸馏这本书《》”, “我要跟这本书《》聊天”, “这本书《》说了啥”, “这本书怎么想”, “这本书怎么看”, “帮我读《》”, “拆解《》”, or after a book is distilled wants to keep asking the current book what it thinks, how it would answer, how it would challenge the reader, or how its logic applies to a concrete question.
 ---
 
-# Bolan · 博览群书
+# Bolan Skill · 博览群书
 
-Bolan 把一本书处理成一个可对话的“书本人格”：先忠实蒸馏文本，再用“内证 + 外证”验证它是否像这本书，最后让书以第一人称回应读者的问题。目标不是普通摘要，而是保留这本书的思考方式、价值排序、盲点、语气、真实读者反馈和能安放读者问题的入口。
+Bolan Skill 把一本书处理成一个可对话的“书本人格”：先忠实蒸馏文本，再用“内证 + 外证”验证它是否像这本书，最后让书以第一人称回应读者的问题。目标不是普通摘要，而是保留这本书的思考方式、价值排序、盲点、语气、真实读者反馈和能安放读者问题的入口。
 
 ## How To Use
 
-用户不需要写 `$bolan`。分两阶段使用。
+用户不需要写 `$bolan-skill`。分两阶段使用。
 
 第一阶段：把书蒸馏出来。
 
@@ -35,7 +35,7 @@ Bolan 把一本书处理成一个可对话的“书本人格”：先忠实蒸�
 用这本书的方式，帮我想想这件事。
 ```
 
-`$bolan` 仍可显式调用，但不是默认用法。
+`$bolan-skill` 仍可显式调用，但不是默认用法。
 
 按用户说法选择模式：
 
@@ -72,7 +72,7 @@ Accept any of these inputs:
 When a local file is available, prepare it before analysis:
 
 ```bash
-python3 /Users/xiaoheipro/.codex/skills/bolan/scripts/prepare_book.py /path/to/book.pdf --out /path/to/output/book-workspace
+python3 scripts/prepare_book.py /path/to/book.pdf --out /path/to/output/book-workspace
 ```
 
 Use the generated `manifest.json`, `text/book.txt`, and `chunks/chunk-*.md` as the source. For very long books, process chunk summaries first, then synthesize across summaries.
@@ -170,7 +170,7 @@ For a reusable companion, create a folder for the book and write:
 - `validation-report.md`: internal text validation and external reception validation results.
 - Optional `SKILL.md`: a single-book skill based on `references/single-book-skill-template.md`.
 
-Name generated single-book skills with lowercase hyphen-case, for example `tao-te-ching-bolan` or `thinking-fast-and-slow-bolan`.
+Name generated single-book skills with lowercase hyphen-case, for example `tao-te-ching-bolan-skill` or `thinking-fast-and-slow-bolan-skill`.
 
 ## Quality Checklist
 
