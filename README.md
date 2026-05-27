@@ -269,4 +269,4 @@ bolan-github/
 
 ## License
 
-当前仓库未内置 license。公开发布前请按你的使用意图选择许可证。
+MIT License. See [LICENSE](./LICENSE).
