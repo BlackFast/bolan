@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bolan Cover Canvas</title>
+  <style>
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #efe4d2;
+      display: grid;
+      place-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    canvas {
+      width: min(100vw, 1280px);
+      height: auto;
+      box-shadow: 0 24px 70px rgba(72, 55, 37, 0.22);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="cover" width="1280" height="640" aria-label="Bolan cover"></canvas>
+  <script>
+    const canvas = document.getElementById("cover");
+    const ctx = canvas.getContext("2d");
+    const W = canvas.width;
+    const H = canvas.height;
+
+    const ink = "#2D2722";
+    const vermilion = "#B3442F";
+    const jade = "#2D8A78";
+    const warmLine = "#D8C8AF";
+    const muted = "#6A5D4F";
+
+    function path(points, close = false) {
+      ctx.beginPath();
+      ctx.moveTo(points[0][0], points[0][1]);
+      for (let i = 1; i < points.length; i++) ctx.lineTo(points[i][0], points[i][1]);
+      if (close) ctx.closePath();
+    }
+
+    function drawMarginalNote(x, y, w, h, side, accent) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(x + 22, y + 10);
+      ctx.bezierCurveTo(x + 70, y - 5, x + w - 38, y - 2, x + w - 12, y + 20);
+      ctx.bezierCurveTo(x + w - 6, y + 54, x + w - 5, y + h - 34, x + w - 26, y + h - 12);
+      ctx.bezierCurveTo(x + w - 80, y + h + 8, x + 58, y + h + 7, x + 16, y + h - 12);
+      ctx.bezierCurveTo(x - 3, y + h - 42, x - 5, y + 38, x + 22, y + 10);
+      ctx.closePath();
+      ctx.fillStyle = "rgba(255, 249, 236, 0.48)";
+      ctx.fill();
+
+      ctx.strokeStyle = accent;
+      ctx.lineWidth = 3;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.globalAlpha = 0.74;
+      const corner = 34;
+      [[x + 18, y + 18, x + 18 + corner, y + 18], [x + 18, y + 18, x + 18, y + 18 + corner],
+       [x + w - 18, y + 18, x + w - 18 - corner, y + 18], [x + w - 18, y + 18, x + w - 18, y + 18 + corner],
+       [x + 18, y + h - 18, x + 18 + corner, y + h - 18], [x + 18, y + h - 18, x + 18, y + h - 18 - corner],
+       [x + w - 18, y + h - 18, x + w - 18 - corner, y + h - 18], [x + w - 18, y + h - 18, x + w - 18, y + h - 18 - corner]
+      ].forEach(([x1, y1, x2, y2]) => {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      });
+
+      ctx.globalAlpha = 0.5;
+      ctx.lineWidth = 4.5;
+      const lineStart = x + 62;
+      const lengths = side === "left" ? [112, 144, 92] : [126, 90, 142];
+      [0, 1, 2].forEach((i) => {
+        ctx.beginPath();
+        ctx.moveTo(lineStart, y + 42 + i * 28);
+        ctx.lineTo(lineStart + lengths[i], y + 42 + i * 28);
+        ctx.stroke();
+      });
+
+      ctx.globalAlpha = 0.75;
+      ctx.fillStyle = accent;
+      ctx.beginPath();
+      ctx.arc(x + 40, y + 42, 4.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 0.34;
+      ctx.beginPath();
+      ctx.arc(x + 40, y + 42, 14, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.globalAlpha = 0.26;
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.moveTo(x + 40, y + 42);
+      ctx.lineTo(x + 62, y + 70);
+      ctx.lineTo(x + 40, y + 98);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function roundedRect(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+    }
+
+    function drawInferenceConstellation() {
+      ctx.save();
+      const nodes = [
+        [704, 172, 4, jade],
+        [737, 143, 5, jade],
+        [777, 151, 4, vermilion],
+        [813, 128, 5, jade],
+        [842, 165, 4, jade],
+        [802, 198, 4, muted],
+        [747, 198, 3.5, muted]
+      ];
+
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = jade;
+      ctx.lineWidth = 2.4;
+      ctx.globalAlpha = 0.34;
+      [[0, 1], [1, 2], [2, 3], [3, 4], [2, 5], [5, 6], [6, 0], [1, 6]].forEach(([a, b]) => {
+        ctx.beginPath();
+        ctx.moveTo(nodes[a][0], nodes[a][1]);
+        ctx.lineTo(nodes[b][0], nodes[b][1]);
+        ctx.stroke();
+      });
+
+      ctx.globalAlpha = 0.22;
+      ctx.strokeStyle = vermilion;
+      ctx.beginPath();
+      ctx.moveTo(704, 172);
+      ctx.bezierCurveTo(666, 188, 648, 216, 639, 244);
+      ctx.stroke();
+      ctx.strokeStyle = jade;
+      ctx.beginPath();
+      ctx.moveTo(842, 165);
+      ctx.bezierCurveTo(874, 185, 878, 216, 860, 244);
+      ctx.stroke();
+
+      ctx.globalAlpha = 0.09;
+      ctx.fillStyle = jade;
+      ctx.beginPath();
+      ctx.ellipse(773, 166, 102, 54, -0.08, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.globalAlpha = 1;
+      nodes.forEach(([x, y, r, color]) => {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      ctx.globalAlpha = 0.74;
+      ctx.strokeStyle = "#FFF9EC";
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.arc(777, 151, 9, 0.2, Math.PI * 1.72);
+      ctx.stroke();
+
+      ctx.globalAlpha = 0.18;
+      ctx.strokeStyle = muted;
+      ctx.lineWidth = 1.5;
+      [[735, 333, 735, 292, 748, 235, 747, 198], [800, 333, 806, 292, 809, 236, 802, 198]].forEach(c => {
+        ctx.beginPath();
+        ctx.moveTo(c[0], c[1]);
+        ctx.bezierCurveTo(c[2], c[3], c[4], c[5], c[6], c[7]);
+        ctx.stroke();
+      });
+      ctx.restore();
+    }
+
+    const bg = ctx.createLinearGradient(0, 0, W, H);
+    bg.addColorStop(0, "#F7F1E7");
+    bg.addColorStop(0.58, "#EFE4D2");
+    bg.addColorStop(1, "#E6D8C3");
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.globalAlpha = 0.55;
+    ctx.strokeStyle = warmLine;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(130, 108);
+    ctx.bezierCurveTo(262, 70, 403, 76, 528, 126);
+    ctx.bezierCurveTo(659, 178, 768, 170, 882, 129);
+    ctx.bezierCurveTo(1011, 82, 1128, 94, 1184, 123);
+    ctx.stroke();
+    ctx.globalAlpha = 0.45;
+    ctx.beginPath();
+    ctx.moveTo(97, 540);
+    ctx.bezierCurveTo(244, 490, 406, 500, 545, 548);
+    ctx.bezierCurveTo(686, 596, 818, 575, 938, 530);
+    ctx.bezierCurveTo(1066, 482, 1164, 507, 1211, 539);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    drawInferenceConstellation();
+
+    ctx.save();
+    ctx.shadowColor = "rgba(91, 74, 57, 0.18)";
+    ctx.shadowBlur = 28;
+    ctx.shadowOffsetY = 18;
+    const page = ctx.createLinearGradient(385, 316, 886, 452);
+    page.addColorStop(0, "#FFF9EC");
+    page.addColorStop(1, "#E8DCC8");
+    ctx.fillStyle = page;
+    ctx.beginPath();
+    ctx.moveTo(379, 336);
+    ctx.bezierCurveTo(454, 299, 540, 303, 625, 359);
+    ctx.lineTo(625, 484);
+    ctx.bezierCurveTo(541, 432, 459, 424, 379, 452);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "#FBF4E6";
+    ctx.beginPath();
+    ctx.moveTo(625, 359);
+    ctx.bezierCurveTo(710, 303, 796, 299, 871, 336);
+    ctx.lineTo(871, 452);
+    ctx.bezierCurveTo(791, 424, 709, 432, 625, 484);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+
+    ctx.strokeStyle = "#B3A187";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(625, 359);
+    ctx.lineTo(625, 484);
+    ctx.stroke();
+
+    ctx.strokeStyle = "#B7A68E";
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+    ctx.globalAlpha = 0.42;
+    [[422,368,477,350,532,355,587,383],[664,383,719,355,774,350,829,368]].forEach(c => {
+      ctx.beginPath(); ctx.moveTo(c[0], c[1]); ctx.bezierCurveTo(c[2], c[3], c[4], c[5], c[6], c[7]); ctx.stroke();
+    });
+    ctx.globalAlpha = 0.34;
+    [[422,405,479,390,532,394,587,420],[664,420,719,394,772,390,829,405]].forEach(c => {
+      ctx.beginPath(); ctx.moveTo(c[0], c[1]); ctx.bezierCurveTo(c[2], c[3], c[4], c[5], c[6], c[7]); ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = ink;
+    ctx.beginPath(); ctx.arc(624, 245, 34, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 24;
+    ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(575, 325); ctx.bezierCurveTo(580, 278, 609, 251, 625, 251); ctx.bezierCurveTo(641, 251, 670, 278, 675, 325); ctx.stroke();
+    ctx.lineWidth = 18;
+    ctx.beginPath(); ctx.moveTo(548, 322); ctx.bezierCurveTo(584, 342, 608, 352, 625, 369); ctx.bezierCurveTo(642, 352, 666, 342, 702, 322); ctx.stroke();
+
+    ctx.lineWidth = 5;
+    ctx.globalAlpha = 0.78;
+    ctx.strokeStyle = vermilion;
+    ctx.beginPath(); ctx.moveTo(516, 272); ctx.bezierCurveTo(455, 220, 393, 205, 336, 230); ctx.bezierCurveTo(276, 257, 259, 323, 296, 367); ctx.bezierCurveTo(330, 407, 393, 411, 450, 378); ctx.stroke();
+    ctx.strokeStyle = jade;
+    ctx.beginPath(); ctx.moveTo(764, 272); ctx.bezierCurveTo(825, 220, 887, 205, 944, 230); ctx.bezierCurveTo(1004, 257, 1021, 323, 984, 367); ctx.bezierCurveTo(950, 407, 887, 411, 830, 378); ctx.stroke();
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = vermilion; ctx.beginPath(); ctx.arc(336, 230, 8, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = jade; ctx.beginPath(); ctx.arc(944, 230, 8, 0, Math.PI * 2); ctx.fill();
+
+    drawMarginalNote(205, 206, 238, 124, "left", vermilion);
+    drawMarginalNote(842, 206, 238, 124, "right", jade);
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+    ctx.globalAlpha = 0.62;
+    ctx.strokeStyle = vermilion; ctx.beginPath(); ctx.moveTo(257, 244); ctx.lineTo(380, 244); ctx.stroke();
+    ctx.strokeStyle = jade; ctx.beginPath(); ctx.moveTo(899, 244); ctx.lineTo(1022, 244); ctx.stroke();
+    ctx.globalAlpha = 0.45;
+    ctx.strokeStyle = vermilion; ctx.beginPath(); ctx.moveTo(257, 281); ctx.lineTo(344, 281); ctx.stroke();
+    ctx.strokeStyle = jade; ctx.beginPath(); ctx.moveTo(899, 281); ctx.lineTo(986, 281); ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = ink;
+    ctx.font = "760 76px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif";
+    ctx.fillText("Bolan", 116, 132);
+    ctx.fillStyle = vermilion;
+    ctx.font = "700 31px -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, sans-serif";
+    ctx.fillText("博览群书", 119, 181);
+    ctx.fillStyle = ink;
+    ctx.font = "650 30px -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, sans-serif";
+    ctx.fillText("把一本书，蒸馏成可以谈心的思想伙伴", 118, 514);
+    ctx.fillStyle = muted;
+    ctx.font = "500 21px -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, sans-serif";
+    ctx.fillText("文本内证 + 读者外证 · distill books into conversations", 119, 556);
+  </script>
+</body>
+</html>
