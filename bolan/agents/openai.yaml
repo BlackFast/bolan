@@ -1,4 +1,0 @@
-interface:
-  display_name: "Bolan"
-  short_description: "Distill books with text and reception checks"
-  default_prompt: "蒸馏这本书《书名》；蒸馏完后，我会问“这本书怎么想”。"
