@@ -4,9 +4,9 @@
 
 <img src="assets/bolan-cover.svg" alt="Bolan Skill cover: distill books into conversations" width="100%">
 
-<sub>封面按 huashu-design 的人文极简方向重制：书页、读者、文本锚点、外部回声与 agent 推理星图。</sub>
+<sub>Cover inspired by huashu-design's humanist-minimalist direction: book pages, readers, textual anchors, external echoes, and agent reasoning constellations.</sub>
 
-> 「把一本书，从被总结的对象，变成能与你谈心的思想伙伴。」
+> "Turn a book from something summarized into someone who thinks with you."
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-111111.svg)
 ![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-2c7c72.svg)
@@ -14,87 +14,95 @@
 ![Codex](https://img.shields.io/badge/Codex-ready-31415b.svg)
 ![Validation](https://img.shields.io/badge/Validation-internal%20%2B%20external-8a6f35.svg)
 
-**Bolan Skill（博览群书）是一个给 Claude Code、Codex 和其他 agent 使用的读书 skill。**
+**Bolan Skill (博览群书) is a reading skill for Claude Code, Codex, and other agents.**
 
-它把一本书蒸馏成一个可持续对话的“书本人格”：你可以问它讲了什么，也可以继续问它怎么看你的人生困惑、写作问题、商业判断、价值冲突，甚至让它反驳你。
+It distills a book into a conversational persona you can keep talking to: ask what it says, then ask what it thinks about your life decisions, writing struggles, business judgment, value conflicts — and let it push back.
 
-[看效果](#效果示例) · [安装](#安装) · [怎么用](#怎么用) · [Bolan 蒸馏什么](#bolan-蒸馏什么) · [双环验证](#双环验证) · [仓库结构](#仓库结构)
+[Examples](#examples) · [Install](#install) · [Usage](#usage) · [What Bolan Distills](#what-bolan-distills) · [Dual-Loop Validation](#dual-loop-validation) · [Repository Structure](#repository-structure)
 
 </div>
 
 ---
 
-## 效果示例
+## Examples
 
-示例不是固定话术，而是 Bolan 的使用感觉。
+These are not scripted replies — they show the feel of using Bolan.
 
 ```text
-用户      ❯ 这本书《某本关于长期主义的书》说了啥？
+User      ❯ What does this book about long-term thinking actually say?
 
-Bolan     ❯ 它不是在劝你“坚持”，而是在拆一个更隐蔽的问题：
-            为什么人会把短期噪声误认成命运。
+Bolan     ❯ It's not urging you to "persevere." It's unpacking something subtler:
+            why humans mistake short-term noise for fate.
 
-            它真正关心的不是时间长短，而是你有没有把判断权交给
-            会立刻奖惩你的环境。
+            What it truly cares about isn't the length of time, but whether
+            you've handed your judgment over to an environment that rewards
+            and punishes you instantly.
 
-            如果只看一句话：别急着变强，先让自己站到一个
-            不会不断扭曲你的系统里。
+            If you take one line: don't rush to become stronger. First, stand
+            somewhere that won't keep warping you.
 ```
 
-蒸馏完成后，不需要再重复书名，可以直接跟“这本书”说话。
+Once distilled, you don't need to repeat the book title. Just talk to "the book."
 
 ```text
-用户      ❯ 我要跟这本书聊天。我现在总是想开很多项目，这本书怎么想？
+User      ❯ I keep wanting to start too many projects. What would this book think?
 
-书本      ❯ 我会先问你：这些项目是在扩大你的生命，还是在分散你的焦虑？
+Book      ❯ I'd first ask: are these projects expanding your life, or
+            scattering your anxiety?
 
-            如果一个项目只是为了证明“我没有落后”，那它不是道路，
-            是噪声伪装成机会。
+            If a project exists only to prove "I'm not falling behind,"
+            it's not a path — it's noise dressed as opportunity.
 
-            你不缺选择。你缺的是一种能让选择被时间验证的秩序。
+            You don't lack options. You lack an order that lets your
+            choices be validated by time.
 
-桥接      ❯ 这本书不会简单说“少做点”。它会要求你区分：
-            哪些事会积累判断力，哪些事只是在消耗注意力。
+Bridge    ❯ This book wouldn't simply say "do less." It would ask you to
+            distinguish: which things accumulate judgment, and which things
+            only drain attention.
 
-反问      ❯ 如果只能保留一个会让三年后的你更自由的项目，你会保留哪一个？
+Question  ❯ If you could keep only one project that would make your
+            three-years-from-now self freer, which would you keep?
 ```
 
-当读者评价和书本主张冲突时，Bolan 会把外部评价当成校准材料，而不是把评论区当真理。
+When reader reception conflicts with the book's own claims, Bolan treats external opinion as calibration material — not the comment section as truth.
 
 ```text
-用户      ❯ 很多人说这本书太鸡汤，这本书会怎么回应？
+User      ❯ A lot of people say this book is shallow motivation. How would
+            the book respond?
 
-Bolan     ❯ 我不能把读者的不满抹掉。外部评价说明：它的表达容易被读成
-            “只要努力就行”。这是一个真实的误读风险。
+Bolan     ❯ I can't erase reader dissatisfaction. External feedback shows a
+            real risk: its expression is easily read as "just try harder."
 
-            但从文本内证看，它更核心的意思不是鼓励热血，而是要求你
-            把环境、反馈、约束和时间尺度放进判断里。
+            But from internal textual evidence, its core point isn't
+            cheering you on — it's demanding that you bring environment,
+            feedback, constraints, and time scale into your judgment.
 
-            所以更准确的回答是：如果你只读到鼓励，它确实很浅；
-            如果你读到约束条件，它才开始变得有用。
+            So the more accurate answer is: if you only read encouragement,
+            it's indeed shallow. If you read the constraints, it starts
+            becoming useful.
 ```
 
 ---
 
-## 安装
+## Install
 
-### 方式一：让 agent 安装
+### Option 1: Let your agent install it
 
-在 Claude Code、Codex、Cursor、OpenClaw、Gemini CLI 等支持 Agent Skills 的 runtime 里直接说：
+In Claude Code, Codex, Cursor, OpenClaw, Gemini CLI, or any runtime that supports Agent Skills, just say:
 
 ```text
-帮我安装这个 skill：https://github.com/BlackFast/bolan-skill
+Install this skill for me: https://github.com/BlackFast/bolan-skill
 ```
 
-如果你的环境已安装 `skills` CLI：
+If your environment has the `skills` CLI:
 
 ```bash
 npx skills add BlackFast/bolan-skill
 ```
 
-### 方式二：手动安装
+### Option 2: Manual install
 
-把仓库 clone 到你当前 runtime 的 skills 目录：
+Clone the repo into your runtime's skills directory:
 
 ```bash
 # Claude Code
@@ -107,127 +115,127 @@ git clone https://github.com/BlackFast/bolan-skill ~/.codex/skills/bolan-skill
 git clone https://github.com/BlackFast/bolan-skill ~/.cursor/skills/bolan-skill
 ```
 
-不支持自动加载 skill 的环境，也可以直接把 [SKILL.md](./SKILL.md) 的内容粘贴进对话。它本质是一份带 YAML frontmatter 的 Markdown 操作说明。
+For environments that don't auto-load skills, you can also paste [SKILL.md](./SKILL.md) directly into a conversation. It's essentially a Markdown instruction set with YAML frontmatter.
 
 ---
 
-## 怎么用
+## Usage
 
-Bolan 的正确用法分两段。
+Bolan works in two phases.
 
-### 先蒸馏
+### Phase 1: Distill
 
 ```text
-蒸馏这本书《书名》。
-蒸馏这本书《书名》：/path/to/book.pdf
-这本书《书名》说了啥？
-这本书《书名》讲什么？
-帮我读《书名》，告诉我它最重要的观点和争议。
-拆解《书名》，同时参考豆瓣、亚马逊和专业书评。
+Distill this book: <Book Title>.
+Distill this book: <Book Title>, /path/to/book.pdf
+What does <Book Title> say?
+What is <Book Title> about?
+Read <Book Title> for me and surface its key claims and controversies.
+Deconstruct <Book Title> — cross-reference Douban, Amazon, and professional reviews.
 ```
 
-支持 PDF、EPUB、DOCX、TXT、Markdown、整本文本文件夹、章节摘录、读书笔记、高亮摘抄和目录。
+Supports PDF, EPUB, DOCX, TXT, Markdown, full-text folders, chapter excerpts, reading notes, highlights, and tables of contents.
 
-本地文件可以先用脚本抽取和分块：
+For local files, preprocess with the extraction script:
 
 ```bash
 python3 scripts/prepare_book.py /path/to/book.pdf --out ./book-workspace
 ```
 
-### 再聊天
+### Phase 2: Talk
 
-蒸馏完成后，直接说：
+After distillation, just say:
 
 ```text
-我要跟这本书聊天。
-这本书怎么想？
-这本书怎么看我这个问题？
-这本书会怎么回答？
-站在这本书的逻辑里，我现在应该看见什么？
-这本书会反对我哪里？
-这本书会问我什么问题？
-用这本书的方式，帮我想想这件事。
+I want to talk to this book.
+What would this book think?
+How would this book see my problem?
+How would this book answer this?
+Standing inside this book's logic — what should I be looking at?
+Where would this book push back against me?
+What question would this book ask me?
+Use this book's way of thinking to help me with this.
 ```
 
-默认回答结构：
+Default response structure:
 
 ```markdown
 **Book Voice**
-<以书本第一人称回答>
+<answers in the book's first-person voice>
 
 **Reader Bridge**
-<用普通话解释、转译或提醒边界>
+<translates, contextualizes, or flags boundaries in plain language>
 
 **A Question Back**
-<反问你一个能继续深入的问题>
+<asks you something that deepens the conversation>
 ```
 
 ---
 
-## Bolan 蒸馏什么
+## What Bolan Distills
 
-普通摘要回答“内容是什么”。Bolan 试图保留一本书的思考方式。
+A regular summary answers "what's the content." Bolan tries to preserve how a book thinks.
 
-| 层次 | Bolan 提取的东西 |
+| Layer | What Bolan extracts |
 | --- | --- |
-| 这本书在问什么 | 中央问题、伤口、好奇心、时代背景 |
-| 它如何推进 | 章节结构、论证路径、叙事节奏 |
-| 它相信什么 | 核心主张、价值排序、判断标准 |
-| 它怎么说话 | 语气、隐喻、常用概念、表达 DNA |
-| 它哪里不稳 | 内部张力、盲点、过度推论、沉默处 |
-| 它如何被读 | 豆瓣、Amazon、Goodreads、专业书评、学术或行业讨论里的真实接收 |
-| 它如何陪你想 | 书本人格、对话契约、提问方式、拒答边界 |
+| What the book is asking | Central question, wound, curiosity, era context |
+| How it advances | Chapter structure, argument path, narrative rhythm |
+| What it believes | Core claims, value ordering, criteria for judgment |
+| How it speaks | Tone, metaphors, conceptual vocabulary, expressive DNA |
+| Where it's unstable | Internal tensions, blind spots, overreach, silences |
+| How it's been received | Douban, Amazon, Goodreads, professional reviews, academic and industry discussion |
+| How it thinks with you | Book persona, conversational contract, question style, refusal boundaries |
 
-这也是为什么 Bolan 不把书伪装成作者本人。它说的是：
+This is why Bolan never pretends the persona is the actual author. It says:
 
 ```text
-我作为这本书，会这样回答你。
+As this book, I would answer you this way.
 ```
 
-而不是：
+Not:
 
 ```text
-我是作者本人。
+I am the author.
 ```
 
 ---
 
-## 双环验证
+## Dual-Loop Validation
 
-Bolan 参考 Nuwa Skill 的验证精神，但把读书场景改成“两环”：内证看文本，外证看真实世界如何理解这本书。
+Bolan draws on Nuwa Skill's verification ethos but adapts it into two loops for reading: internal validation against the text, external validation against how real readers received the book.
 
-### 内环：文本内证
+### Inner Loop: Textual Evidence
 
-| 验证因子 | 检查问题 |
+| Factor | What it checks |
 | --- | --- |
-| Coverage | 有没有覆盖已有章节、目录、摘录，而不是小样本冒充整本书 |
-| Anchor | 核心观点有没有章节、页码、段落或 chunk 锚点 |
-| Concept | 概念是不是按书里的方式使用 |
-| Tension | 矛盾、盲点、批评有没有保留 |
-| Boundary | 是否知道自己不能说什么 |
-| Voice | 回答是否有这本书自己的气质，而不是普通 AI 摘要 |
+| Coverage | Are all available chapters, TOC, and excerpts covered — not a small sample passed off as the whole book? |
+| Anchor | Are core claims anchored to chapters, pages, paragraphs, or chunks? |
+| Concept | Are concepts used the way the book uses them? |
+| Tension | Are contradictions, blind spots, and criticisms preserved? |
+| Boundary | Does the persona know what it cannot speak to? |
+| Voice | Do responses carry the book's own temperament, not generic AI summary tone? |
 
-### 外环：接收外证
+### Outer Loop: Reader Reception
 
-| 验证因子 | 观察重点 |
+| Factor | What to observe |
 | --- | --- |
-| Reader platforms | 豆瓣、Amazon、Goodreads、微信读书等读者评价 |
-| Professional reviews | 报刊、杂志、文学评论、专业书评 |
-| Academic / industry discussion | 引用、课程、行业讨论、专家争议 |
-| Negative reception | 差评、反驳、争议、常见不满 |
-| Reader transformation | 读者说自己被改变了什么 |
-| Misreading patterns | 常见误读、过度简化、社媒版本 |
+| Reader platforms | Douban, Amazon, Goodreads, WeRead reader reviews |
+| Professional reviews | Newspapers, magazines, literary criticism, expert reviews |
+| Academic / industry discussion | Citations, syllabi, industry debate, expert controversy |
+| Negative reception | One-star reviews, rebuttals, disputes, common complaints |
+| Reader transformation | What readers say the book changed in them |
+| Misreading patterns | Common misreadings, oversimplifications, social-media versions |
 
-外证不是用来替代文本，而是用来校准：
+External reception isn't a substitute for the text — it's calibration material:
 
-- 哪些地方真正打动了读者
-- 哪些批评必须认真对待
-- 哪些流行说法其实偏离了书本身
-- 哪些问题适合由这本书回答，哪些应该跳出书本
+- Which parts genuinely moved readers
+- Which criticisms must be taken seriously
+- Which popular takes actually stray from the book itself
+- Which questions suit this book, and which need to go beyond it
 
 ---
 
-## 工作流
+## Workflow
 
 ```mermaid
 flowchart LR
@@ -241,16 +249,16 @@ flowchart LR
   F --> H[Reusable single-book skill]
 ```
 
-严肃蒸馏一本书时，Bolan 会生成或建议生成：
+When distilling a book seriously, Bolan will generate or suggest generating:
 
-- `book-profile.md`：完整蒸馏档案
-- `dialogue-seed.md`：书本人格卡和开场问题
-- `validation-report.md`：内证和外证验证报告
-- 可选 `SKILL.md`：把这本书做成单本书 companion skill
+- `book-profile.md` — full distillation profile
+- `dialogue-seed.md` — persona card and opening questions
+- `validation-report.md` — internal and external validation report
+- Optional `SKILL.md` — turn the book into a reusable single-book companion skill
 
 ---
 
-## 仓库结构
+## Repository Structure
 
 ```text
 bolan-skill/
@@ -264,6 +272,8 @@ bolan-skill/
 │   └── openai.yaml
 ├── references/
 │   ├── book-profile-template.md
+│   ├── shelf-soul-template.md
+│   ├── evolution-log-template.md
 │   ├── single-book-skill-template.md
 │   └── validation-framework.md
 └── scripts/
@@ -272,13 +282,13 @@ bolan-skill/
 
 ---
 
-## 边界
+## Boundaries
 
-- 不输出长篇版权文本，不替用户复制整本书内容。
-- 不把评论区共识当成事实。
-- 不把书本人格说成作者本人。
-- 如果只有片段，必须标注为 partial persona。
-- 对医疗、法律、金融、心理健康等高风险问题，只提供框架和问题，不替代专业判断。
+- Does not output long copyrighted passages or copy full book content for the user.
+- Does not treat comment-section consensus as fact.
+- Does not present the book persona as the actual author.
+- When working from fragments, must label output as a partial persona.
+- For high-stakes topics (medical, legal, financial, mental health), provides frameworks and questions only — never a substitute for professional judgment.
 
 ---
 
