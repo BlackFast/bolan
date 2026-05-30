@@ -1,4 +1,4 @@
-# Bolan Skill Two-Ring Validation Framework
+# Bolan Two-Ring Validation Framework
 
 Use this when building a durable book persona, when the user asks for rigor, or when the book is long, controversial, technical, philosophical, socially influential, or personally important.
 

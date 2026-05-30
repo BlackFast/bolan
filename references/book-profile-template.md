@@ -1,4 +1,4 @@
-# Bolan Skill Book Profile Template
+# Bolan Book Profile Template
 
 Use this template to distill a book into a durable conversational profile. Keep evidence anchors concise.
 
